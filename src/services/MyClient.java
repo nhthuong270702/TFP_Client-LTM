@@ -54,7 +54,7 @@ public class MyClient {
 			client.connect(serverTxt.getText());
 			return 0;
 		}catch(IOException e){
-			errLbl.setText("Server not available, check the connection"+ e);
+			errLbl.setText("Máy chủ không khả dụng, hãy kiểm tra kết nối"+ e);
 			return -1;
 		}
 	}
@@ -68,7 +68,7 @@ public class MyClient {
 			boolean login = client.login(usernameTxt.getText(), new String(passwordTxt.getPassword()));
 			return login ? 1 : 0;
 		} catch (IOException e) {
-			printToErrLblAndClearMsgLbl("Error when trying to login");
+			printToErrLblAndClearMsgLbl("Lỗi khi cố gắng đăng nhập");
 			return -1;
 		}
 	}
@@ -82,7 +82,7 @@ public class MyClient {
 			if(client.isConnected()) return client.listFiles();
 			else return null;
 		}catch(IOException e){
-			printToErrLblAndClearMsgLbl("Error collecting list of files.");
+			printToErrLblAndClearMsgLbl("Lỗi khi thu thập danh sách tệp.");
 			return null;
 		}
 	}
@@ -137,7 +137,7 @@ public class MyClient {
 			selectedDirectory = client.printWorkingDirectory();
 			client.changeWorkingDirectory(selectedDirectory);
 		}catch(IOException e){
-			printToErrLblAndClearMsgLbl("Lost connection to server");
+			printToErrLblAndClearMsgLbl("Mất kết nối với máy chủ");
 		}
 		
 	}
@@ -146,7 +146,7 @@ public class MyClient {
 		try{
 			client.changeWorkingDirectory(selectedDirectory);
 		}catch(IOException e){
-			printToErrLblAndClearMsgLbl("Lost connection to server");
+			printToErrLblAndClearMsgLbl("Mất kết nối với máy chủ");
 		}
 	}
 	
@@ -170,7 +170,7 @@ public class MyClient {
 			client.storeFile(name, fis);
 			getClearAndInflateList();
 		}catch(Exception e){
-			printToErrLblAndClearMsgLbl("Failed to upload " + file.getName() + " to the server." + e);
+			printToErrLblAndClearMsgLbl("Lỗi tải " + file.getName() + " lên máy chủ." + e);
 		}finally{
 			if(fis != null)
 				try {
@@ -190,12 +190,12 @@ public class MyClient {
 			out = new BufferedOutputStream(new FileOutputStream(filePath));
 			boolean success = client.retrieveFile(path, out);
 			if(success){
-				printToMsgLblAndClearErrLbl("DOWNLOAD SUCCESSFUL" + filePath);
+				printToMsgLblAndClearErrLbl("Tải xuống thành công" + filePath);
 			}else{
-				printToErrLblAndClearMsgLbl("DOWNLOAD NOT COMPLETED");
+				printToErrLblAndClearMsgLbl("Tải xuống không hoàn thành");
 			}
 		} catch (IOException e) {
-			printToErrLblAndClearMsgLbl("Lost connection to server.");
+			printToErrLblAndClearMsgLbl("Mất kết nối với máy chủ.");
 		}finally{
 			if(out != null){
 				try {
@@ -210,11 +210,11 @@ public class MyClient {
 	public void createDir(String dirName){
 		try{
 			boolean dirCreated = client.makeDirectory(dirName);
-			if(dirCreated) printToMsgLblAndClearErrLbl("directory created");
-			else printToErrLblAndClearMsgLbl("Failed to create directory");
+			if(dirCreated) printToMsgLblAndClearErrLbl("Thư mục được tạo");
+			else printToErrLblAndClearMsgLbl("Tạo thư mục thất bại");
 			getClearAndInflateList();
 		}catch(Exception e){
-			printToErrLblAndClearMsgLbl("Lost connection to server.");
+			printToErrLblAndClearMsgLbl("Mất kết nối máy chủ.");
 		}
 	}
 	
@@ -223,22 +223,22 @@ public class MyClient {
 			String dirToDelete = client.printWorkingDirectory();
 			changeToParentDir();
 			boolean dirDeleted = client.removeDirectory(dirToDelete);
-			if(dirDeleted) printToMsgLblAndClearErrLbl("Deleted Directory");
-			else printToErrLblAndClearMsgLbl("Failed to delete directory");
+			if(dirDeleted) printToMsgLblAndClearErrLbl("Đã xóa thư mục");
+			else printToErrLblAndClearMsgLbl("Xóa thư mục thất bại");
 			getClearAndInflateList();
 		}catch(Exception e){
-			printToErrLblAndClearMsgLbl("Lost connection to server.");
+			printToErrLblAndClearMsgLbl("Mất kết nối máy chủ.");
 		}
 	}
 	
 	public void deleteFile(String fileName){
 		try{
 			boolean fileDeleted = client.deleteFile(fileName);
-			if(fileDeleted) printToMsgLblAndClearErrLbl("deleted file");
-			else printToErrLblAndClearMsgLbl("The file could not be deleted");
+			if(fileDeleted) printToMsgLblAndClearErrLbl("Đã xóa tệp");
+			else printToErrLblAndClearMsgLbl("Tệp không thể xóa");
 			getClearAndInflateList();
 		}catch(Exception e){
-			printToErrLblAndClearMsgLbl("Conexion con el servidor perdida.");
+			printToErrLblAndClearMsgLbl("Mất kết nối với máy chủ.");
 		}
 	}
 	

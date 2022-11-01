@@ -76,23 +76,29 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 	 * Create the frame.
 	 */
 	public Main() {
+		setForeground(Color.YELLOW);
+		setBackground(new Color(255, 255, 0));
 		setMinimumSize(new Dimension(1024, 728));
 		setMaximumSize(new Dimension(1024, 728));
 		setResizable(false);
-		setTitle("Simple FTP Client");
+		setTitle("FTP Client");
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 716, 482);
+		setBounds(100, 100, 1006, 728);
 		contentPane = new JPanel();
+		contentPane.setForeground(new Color(0, 0, 0));
+		contentPane.setBackground(Color.YELLOW);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{61, 0, 0, 124, 0, 0, 122, 55, 0};
-		gbl_contentPane.rowHeights = new int[]{47, 0, 0, 0, 0, 0, 0, 0, -11, 0, 0, 59, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11, 0, 0, 0, 59, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblUsuario = new JLabel("User:");
+		JLabel lblUsuario = new JLabel("Người dùng:");
+		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblUsuario.setForeground(Color.BLUE);
 		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
 		gbc_lblUsuario.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsuario.gridx = 1;
@@ -108,7 +114,9 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 		contentPane.add(txtUser, gbc_txtUser);
 		txtUser.setColumns(10);
 		
-		JLabel lblServidorFtp = new JLabel("Servidor FTP:");
+		JLabel lblServidorFtp = new JLabel("Địa chỉ FTP_SERVER");
+		lblServidorFtp.setForeground(Color.BLUE);
+		lblServidorFtp.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_lblServidorFtp = new GridBagConstraints();
 		gbc_lblServidorFtp.insets = new Insets(0, 0, 5, 5);
 		gbc_lblServidorFtp.anchor = GridBagConstraints.EAST;
@@ -125,7 +133,9 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 		contentPane.add(txtServer, gbc_txtServer);
 		txtServer.setColumns(10);
 		
-		JLabel lblConstrasea = new JLabel("Password:");
+		JLabel lblConstrasea = new JLabel("Mật khẩu");
+		lblConstrasea.setForeground(Color.BLUE);
+		lblConstrasea.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_lblConstrasea = new GridBagConstraints();
 		gbc_lblConstrasea.insets = new Insets(0, 0, 5, 5);
 		gbc_lblConstrasea.gridx = 1;
@@ -140,67 +150,11 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 		gbc_txtPass.gridy = 2;
 		contentPane.add(txtPass, gbc_txtPass);
 		
-		btnConnect = new JButton("To connect");
-		btnConnect.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		GridBagConstraints gbc_btnConnect = new GridBagConstraints();
-		gbc_btnConnect.insets = new Insets(0, 0, 5, 5);
-		gbc_btnConnect.gridx = 5;
-		gbc_btnConnect.gridy = 2;
-		contentPane.add(btnConnect, gbc_btnConnect);
-		
-		btnDisconnect = new JButton("Log off");
-		GridBagConstraints gbc_btnDisconnect = new GridBagConstraints();
-		gbc_btnDisconnect.insets = new Insets(0, 0, 5, 5);
-		gbc_btnDisconnect.gridx = 6;
-		gbc_btnDisconnect.gridy = 2;
-		contentPane.add(btnDisconnect, gbc_btnDisconnect);
-		
-		btnUpload = new JButton("Subir");
-		btnUpload.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		GridBagConstraints gbc_btnUpload = new GridBagConstraints();
-		gbc_btnUpload.insets = new Insets(0, 0, 5, 5);
-		gbc_btnUpload.gridx = 6;
-		gbc_btnUpload.gridy = 3;
-		contentPane.add(btnUpload, gbc_btnUpload);
-		
-		btnDownload = new JButton("Download");
-		btnDownload.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		GridBagConstraints gbc_btnDownload = new GridBagConstraints();
-		gbc_btnDownload.insets = new Insets(0, 0, 5, 5);
-		gbc_btnDownload.gridx = 6;
-		gbc_btnDownload.gridy = 4;
-		contentPane.add(btnDownload, gbc_btnDownload);
-		
-		btnCrearDirectorio = new JButton("Create Directory");
-		btnCrearDirectorio.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		GridBagConstraints gbc_btnCrearDirectorio = new GridBagConstraints();
-		gbc_btnCrearDirectorio.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCrearDirectorio.gridx = 6;
-		gbc_btnCrearDirectorio.gridy = 5;
-		contentPane.add(btnCrearDirectorio, gbc_btnCrearDirectorio);
-		
-		btnEliminarDirectorio = new JButton("Delete Directory");
-		btnEliminarDirectorio.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		GridBagConstraints gbc_btnEliminarDirectorio = new GridBagConstraints();
-		gbc_btnEliminarDirectorio.insets = new Insets(0, 0, 5, 5);
-		gbc_btnEliminarDirectorio.gridx = 6;
-		gbc_btnEliminarDirectorio.gridy = 6;
-		contentPane.add(btnEliminarDirectorio, gbc_btnEliminarDirectorio);
-		
-		btnExit = new JButton("Leave");
-		btnExit.setForeground(Color.BLACK);
-		btnExit.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		GridBagConstraints gbc_btnExit = new GridBagConstraints();
-		gbc_btnExit.insets = new Insets(0, 0, 5, 5);
-		gbc_btnExit.gridx = 6;
-		gbc_btnExit.gridy = 7;
-		contentPane.add(btnExit, gbc_btnExit);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 5;
+		gbc_scrollPane.gridheight = 12;
 		gbc_scrollPane.gridwidth = 4;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
@@ -209,14 +163,88 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		list = new JList<>();
+		list.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(list);
+		
+		btnConnect = new JButton("Đăng nhập");
+		btnConnect.setForeground(Color.BLUE);
+		btnConnect.setBackground(Color.WHITE);
+		btnConnect.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		GridBagConstraints gbc_btnConnect = new GridBagConstraints();
+		gbc_btnConnect.insets = new Insets(0, 0, 5, 5);
+		gbc_btnConnect.gridx = 6;
+		gbc_btnConnect.gridy = 4;
+		contentPane.add(btnConnect, gbc_btnConnect);
+		
+		// add action listeners
+		btnConnect.addActionListener(this);
+		
+		btnConnect.setEnabled(true);
+		
+		btnDisconnect = new JButton("Đăng xuất");
+		btnDisconnect.setFont(new Font("Tahoma", Font.BOLD, 13));
+		GridBagConstraints gbc_btnDisconnect = new GridBagConstraints();
+		gbc_btnDisconnect.insets = new Insets(0, 0, 5, 5);
+		gbc_btnDisconnect.gridx = 6;
+		gbc_btnDisconnect.gridy = 6;
+		contentPane.add(btnDisconnect, gbc_btnDisconnect);
+		btnDisconnect.addActionListener(this);
+		btnDisconnect.setEnabled(false);
+		
+		btnUpload = new JButton("Chọn file");
+		btnUpload.setFont(new Font("Dialog", Font.BOLD, 13));
+		GridBagConstraints gbc_btnUpload = new GridBagConstraints();
+		gbc_btnUpload.insets = new Insets(0, 0, 5, 5);
+		gbc_btnUpload.gridx = 6;
+		gbc_btnUpload.gridy = 7;
+		contentPane.add(btnUpload, gbc_btnUpload);
+		btnUpload.addActionListener(this);
+		btnUpload.setEnabled(false);
+		
+		btnDownload = new JButton("Tải xuống");
+		btnDownload.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		GridBagConstraints gbc_btnDownload = new GridBagConstraints();
+		gbc_btnDownload.insets = new Insets(0, 0, 5, 5);
+		gbc_btnDownload.gridx = 6;
+		gbc_btnDownload.gridy = 8;
+		contentPane.add(btnDownload, gbc_btnDownload);
+		btnDownload.addActionListener(this);
+		btnDownload.setEnabled(false);
+		
+		btnCrearDirectorio = new JButton("Tạo thư mục");
+		btnCrearDirectorio.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		GridBagConstraints gbc_btnCrearDirectorio = new GridBagConstraints();
+		gbc_btnCrearDirectorio.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCrearDirectorio.gridx = 6;
+		gbc_btnCrearDirectorio.gridy = 9;
+		contentPane.add(btnCrearDirectorio, gbc_btnCrearDirectorio);
+		btnCrearDirectorio.addActionListener(this);
+		
+		btnEliminarDirectorio = new JButton("Xóa thư mục");
+		btnEliminarDirectorio.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		GridBagConstraints gbc_btnEliminarDirectorio = new GridBagConstraints();
+		gbc_btnEliminarDirectorio.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEliminarDirectorio.gridx = 6;
+		gbc_btnEliminarDirectorio.gridy = 10;
+		contentPane.add(btnEliminarDirectorio, gbc_btnEliminarDirectorio);
+		btnEliminarDirectorio.addActionListener(this);
+		
+		btnExit = new JButton("Rời khỏi");
+		btnExit.setForeground(Color.RED);
+		btnExit.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		GridBagConstraints gbc_btnExit = new GridBagConstraints();
+		gbc_btnExit.insets = new Insets(0, 0, 5, 5);
+		gbc_btnExit.gridx = 6;
+		gbc_btnExit.gridy = 15;
+		contentPane.add(btnExit, gbc_btnExit);
+		btnExit.addActionListener(this);
 		
 		lblTxt = new JLabel("-");
 		GridBagConstraints gbc_lblTxt = new GridBagConstraints();
 		gbc_lblTxt.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTxt.gridx = 1;
-		gbc_lblTxt.gridy = 9;
+		gbc_lblTxt.gridy = 17;
 		contentPane.add(lblTxt, gbc_lblTxt);
 		
 		lblError = new JLabel("-");
@@ -226,25 +254,11 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 		GridBagConstraints gbc_lblError = new GridBagConstraints();
 		gbc_lblError.insets = new Insets(0, 0, 5, 5);
 		gbc_lblError.gridx = 1;
-		gbc_lblError.gridy = 10;
+		gbc_lblError.gridy = 18;
 		contentPane.add(lblError, gbc_lblError);
-		
-		// add action listeners
-		btnConnect.addActionListener(this);
-		btnDisconnect.addActionListener(this);
-		btnExit.addActionListener(this);
-		btnDownload.addActionListener(this);
-		btnUpload.addActionListener(this);
-		btnCrearDirectorio.addActionListener(this);
-		btnEliminarDirectorio.addActionListener(this);
 		list.addMouseListener(this);
 		
-		btnConnect.setEnabled(true);
-		btnDownload.setEnabled(false);
-		btnUpload.setEnabled(false);
-		btnDisconnect.setEnabled(false);
-		
-		int opt = JOptionPane.showConfirmDialog(this, "Do you want to load the default server address?", "default server", JOptionPane.YES_NO_OPTION);
+		int opt = JOptionPane.showConfirmDialog(this, "Bạn có muốn tải địa chỉ máy chủ mặc định không?"," Máy chủ mặc định", JOptionPane.YES_NO_OPTION);
 		if(opt == JOptionPane.YES_OPTION){
 			txtServer.setText(Model.FTP_SERVER_ADDR);
 		}
@@ -268,7 +282,7 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 				switch(out){
 				
 				case 1:
-					JOptionPane.showMessageDialog(this, "User logged in successfully.");
+					JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
 					btnConnect.setEnabled(false);
 					btnDownload.setEnabled(false);
 					btnUpload.setEnabled(true);
@@ -281,15 +295,15 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 					}
 					break;
 				case 0:
-					JOptionPane.showMessageDialog(this, "Wrong log data.");
+					JOptionPane.showMessageDialog(this, "Lỗi");
 					break;
 				case -1:
-					JOptionPane.showMessageDialog(this, "Error establishing connection to server");
+					JOptionPane.showMessageDialog(this, "Lỗi máy chủ");
 					break;
 				}
 				
 			}else {
-				JOptionPane.showMessageDialog(this, "You must complete all the fields to be able to log in...");
+				JOptionPane.showMessageDialog(this, "Bạn phải hoàn thành tất cả các trường để có thể đăng nhập ...");
 			}
 			
 		}else if(e.getSource() == btnExit){
@@ -301,7 +315,7 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 					e1.printStackTrace();
 				}
 			else
-				JOptionPane.showMessageDialog(this, "You must log out before disconnecting!", "Error", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Bạn phải đăng xuất trước khi ngắt kết nối!", "Error", JOptionPane.WARNING_MESSAGE);
 		}else if(e.getSource() == btnDownload){
 			
 			String file = Utilidades.sliceSelectedItem(selectedItem);
@@ -311,7 +325,7 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 		}else if(e.getSource() == btnUpload){
 			
 			JFileChooser jFile = new JFileChooser();
-			jFile.setDialogTitle("Select the file to upload");
+			jFile.setDialogTitle("Chọn tệp để tải lên");
 			jFile.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			int result = jFile.showDialog(this, "Subir");
 			
@@ -339,7 +353,7 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 			ftpClient.clearList();	
 		}else if(e.getSource() == btnCrearDirectorio){
 			
-			String newDirName = JOptionPane.showInputDialog("Enter the name of the new file");
+			String newDirName = JOptionPane.showInputDialog("Nhập tên của tệp mới");
 			
 			if(!newDirName.equals("")) ftpClient.createDir(newDirName);
 		}else if(e.getSource() == btnEliminarDirectorio){
@@ -359,7 +373,7 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 		if(e.getSource() == list){
 			
 			if(list.getSelectedIndex() == 0){
-				btnEliminarDirectorio.setText("Delete Directory");
+				btnEliminarDirectorio.setText("Xóa thư mục");
 				try {
 					ftpClient.changeToParentDirAndInflateList();
 				} catch (Exception e1) {
@@ -372,7 +386,7 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 				
 				if(isDir(selectedItem)){
 					btnDownload.setEnabled(false);
-					btnEliminarDirectorio.setText("Delete Directory");
+					btnEliminarDirectorio.setText("Xóa thư mục");
 					String dir = Utilidades.sliceSelectedItem(selectedItem).trim();
 					ftpClient.setSelectedDirectory(dir);
 					try {
@@ -381,7 +395,7 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 					}
 					
 				}else {
-					btnEliminarDirectorio.setText("Delete file");
+					btnEliminarDirectorio.setText("Xóa tệp");
 					btnDownload.setEnabled(true);
 				}
 				
