@@ -275,7 +275,7 @@ public class Main extends JFrame implements ActionListener, MouseListener{
 			if(!txtUser.getText().equalsIgnoreCase("") && 
 					!new String(txtPass.getPassword()).equalsIgnoreCase("") && !txtServer.getText().equalsIgnoreCase("")){
 				
-				int out = ftpClient.getConnection();
+				int out = ftpClient.getConnection();;
 				
 				if(out == 0) out = ftpClient.logUser();
 				
